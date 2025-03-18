@@ -1,4 +1,6 @@
-import Express, { json } from "express";
+import  dotenv from "dotenv"; // Import dotenv
+dotenv.config();
+import Express,{json} from"express";// Load environment variablesimport Express, { json } from "express";
 import { connectDB } from "./db/config.js";
 import initDB from "./db/init.js"; // Corrected import
 import customerRouter from "./router/customer/index.js";
@@ -16,6 +18,9 @@ import cust_LogoutRouter from "./router/auth/customerAuth/logout.js";
 import contactRouter from "./router/customer/contact.js"; // Import the contact router
 import cors from "cors";
 import portfinder from "portfinder";
+import sendEmail from "./controller/customer/send_email.js";
+
+
 
 const app = Express();
 
@@ -24,6 +29,12 @@ app.use(json());
 
 // Enable CORS
 app.use(cors());
+console.log("Loaded Email Config:", {
+  EMAIL_HOST: process.env.EMAIL_HOST,
+  EMAIL_PORT: process.env.EMAIL_PORT,
+  EMAIL_USER: process.env.EMAIL_USER,
+  EMAIL_PASS: process.env.EMAIL_PASS ? "SET" : "NOT SET"
+});
 
 // Connect to the database and initialize it
 const startServer = async () => {
@@ -52,6 +63,7 @@ const startServer = async () => {
 };
 
 // Routes
+app.use("/api", sendEmail);
 app.use(customerRouter);
 app.use(cust_AuthRoutes);
 app.use(mech_AuthRoutes);
@@ -64,7 +76,8 @@ app.use(cust_PasswordRouter);
 app.use(mech_PasswordRouter);
 app.use(job_CompletionRouter);
 app.use(cust_LogoutRouter);
-app.use("/contact", contactRouter); // Add the contact router
+app.use( contactRouter); // Add the contact router
+// Add the sendEmail middleware 
 
 // Start the application
 startServer();

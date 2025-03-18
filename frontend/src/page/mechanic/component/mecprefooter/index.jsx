@@ -11,9 +11,7 @@ const Mecprefooter = () => {
             <div>
               <h3 className=" text-blue-500 font-bold">Mechanic Online</h3>
               <p>
-                Maxime modi distinctio beatae sit dignissimos dolorum ratione ad
-                facilis soluta? Officia, quis assumenda nostrum magni asperiores
-                earum obcaecati.
+              Follow us on our social media platforms to get the latest service updates and offers.
               </p>
               <div className="flex justify-around">
                 <a href="#">
@@ -58,16 +56,16 @@ const Mecprefooter = () => {
           </Col>
           <Col xs={12} sm={6} md={6} lg={4} className="p-4">
             <h3 className=" text-blue-500 font-bold shadow-yellow-500">
-              Conatct Us
+              Contact us
             </h3>
             <p className="m-0">
-              <b>Address:</b> Street # 1 ,Office # 44, ModelTown Lahore
+              <b>Address:</b>  P.O. BOX 143-10300, kerugoya </p>
+    
+            <p className="m-0">
+              <b>Whatsapp:</b> +254 712 345 678
             </p>
             <p className="m-0">
-              <b>Whatsapp:</b> 0300 0011223
-            </p>
-            <p className="m-0">
-              <b>Email:</b> mechaniconline@gmail.com
+              <b>Email:</b> onlinemechanic@gmail.com
             </p>
           </Col>
         </Row>

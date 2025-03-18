@@ -11,6 +11,7 @@ const validationSchema = Yup.object().shape({
   serviceType: Yup.string().required("Required"),
   Description: Yup.string().required("Required"),
   Name: Yup.string().required("Required"),
+  Email: Yup.string().required("Required"),
   Phone: Yup.string().required("Required"),
   Address: Yup.string().required("Required"),
 });
@@ -24,6 +25,7 @@ const Serviceform = () => {
     serviceType: "",
     Description: "",
     Name: "",
+    Email:"",
     Phone: "",
     Address: "",
     Location: { latitude: "", longitude: "" },
@@ -125,6 +127,7 @@ const Serviceform = () => {
               serviceType: "",
               Description: "",
               Name: "",
+              Email: "",
               Phone: "",
               Address: "",
             }}
@@ -196,6 +199,18 @@ const Serviceform = () => {
                     className="text-lg m-2 w-100 text-black px-2 border-3 border-blue-400 focus:outline-none"
                   />
                   <ErrorMessage name="name" component="div" className="text-red-600 px-2" />
+                </div>
+                <div>
+                  <label htmlFor="Email" className="text-md mx-2 font-bold">
+                    Email
+                  </label>
+                  <br />
+                  <Field
+                    type="email"
+                    name="Email"
+                    className="text-lg m-2 w-100 text-black px-2 border-3 border-blue-400 focus:outline-none"
+                  />
+                  <ErrorMessage name="Email" component="div" className=" text-red-600 px-2" />
                 </div>
                 <div>
                   <label htmlFor="Phone" className="text-md mx-2 font-bold">

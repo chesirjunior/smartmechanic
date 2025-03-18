@@ -36,7 +36,7 @@ const Mecheader = () => {
             <div className="flex items-center font-bold">
               <span>Mechanic</span>
               <img
-                src="src\image\logowhite.png"
+                src="src\image\MECHA LOGO.jpg"
                 alt="Image Loading Error"
                 className="w-[35px] h-[35px] mx-1"
               />

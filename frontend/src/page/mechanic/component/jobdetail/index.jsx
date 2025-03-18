@@ -26,15 +26,31 @@ const Jobcredentials = () => {
     const serviceStatus = {
       serviceStatus: "Active",
     };
-    const res = await axios.put(
-      `http://localhost:3308/services/${serviceId}`,
-      serviceStatus
-    );
-    console.log(res);
-    if (res.status === 200) {
-      setAccepted(true);
-    } else {
-      console.error("Unexpected response status:", res.status);
+
+    try {
+      // Update service status to "Active"
+      const res = await axios.put(`http://localhost:3308/services/${serviceId}`, serviceStatus);
+
+      if (res.status === 200) {
+        setAccepted(true);
+
+        // Fetch service details to get the user's email
+        const serviceRes = await axios.get(`http://localhost:3308/services/${serviceId}`);
+        const userEmail = serviceRes.data.service.Email; // Ensure the backend sends this field
+
+        // Send email notification to the user
+        await axios.post("http://localhost:3308/api/send_email", {
+          to: userEmail,
+          subject: "Service Request Accepted",
+          text: `Your service request with ID ${serviceId} has been accepted by a mechanic. They will contact you shortly.`,
+        });
+
+        console.log("Email notification sent.");
+      } else {
+        console.error("Unexpected response status:", res.status);
+      }
+    } catch (error) {
+      console.error("Error updating status or sending email:", error);
     }
   };
 
@@ -50,7 +66,6 @@ const Jobcredentials = () => {
     }, 1000);
 
     try {
-      // const MechanicId = localStorage.getItem("mechanicId");
       const MechanicId = parseInt(localStorage.getItem("mechanicId"));
       const requestServiceId = parseInt(serviceId);
       const res = await axios.post(`http://localhost:3308/jobcompletion`, {

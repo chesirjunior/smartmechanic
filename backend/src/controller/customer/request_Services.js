@@ -9,6 +9,7 @@ const requestServices_Controller = {
       const schema = Joi.object({
         serviceType: Joi.string().required(),
         Name: Joi.string().required(),
+        Email: Joi.string().required(),
         Description: Joi.string().required(),
         Phone: Joi.string().required(),
         Address: Joi.string().required(),
@@ -101,6 +102,7 @@ const requestServices_Controller = {
       const schema = Joi.object({
         serviceType: Joi.string(),
         Name: Joi.string(),
+        Email: Joi.string(),
         Description: Joi.string(),
         Phone: Joi.string(),
         Address: Joi.string(),

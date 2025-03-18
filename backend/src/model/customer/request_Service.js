@@ -34,6 +34,10 @@ const requestServices_Model = sequelize.define(
       allowNull: false,
       defaultValue: "Inactive",
     },
+    Email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   },
   {
     paranoid: true,
