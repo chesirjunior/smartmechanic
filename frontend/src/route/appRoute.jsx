@@ -14,6 +14,7 @@ import Jobdetail from "../page/mechanic/pages/detail";
 import PrivateRoute from "./PrivateRoute";
 import Mecsignup from "../page/mechanic/component/signup";
 import Mecloginform from "../page/mechanic/component/login";
+import AddCategory from "../page/mechanic/component/Categories";
 
 const AppRoute = () => {
   return (
@@ -44,6 +45,7 @@ const AppRoute = () => {
         <Route path="/finished" element={<Finishedjob />} />
         <Route path="/mecsignup" element={<Mecsignup />} />
         <Route path="/meclogin" element={<Mecloginform />} />
+        <Route path="/addcategory" element={<AddCategory />} />
       </Routes>
     </>
   );

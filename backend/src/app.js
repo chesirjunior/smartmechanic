@@ -19,6 +19,8 @@ import contactRouter from "./router/customer/contact.js"; // Import the contact 
 import cors from "cors";
 import portfinder from "portfinder";
 import sendEmail from "./controller/customer/send_email.js";
+import admin_Routes from "./router/auth/AdminAuth/index.js";
+import adminRouter from "./router/admin/index.js";
 
 
 
@@ -28,7 +30,15 @@ const app = Express();
 app.use(json());
 
 // Enable CORS
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:3308"], // Allow multiple origins
+    methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed HTTP methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Limit allowed headers
+    credentials: true, // Allow cookies and credentials if needed
+    maxAge: 3600, // Cache the preflight response for 1 hour
+  })
+);
 console.log("Loaded Email Config:", {
   EMAIL_HOST: process.env.EMAIL_HOST,
   EMAIL_PORT: process.env.EMAIL_PORT,
@@ -76,6 +86,8 @@ app.use(cust_PasswordRouter);
 app.use(mech_PasswordRouter);
 app.use(job_CompletionRouter);
 app.use(cust_LogoutRouter);
+app.use(admin_Routes)
+app.use(adminRouter)
 app.use( contactRouter); // Add the contact router
 // Add the sendEmail middleware 
 

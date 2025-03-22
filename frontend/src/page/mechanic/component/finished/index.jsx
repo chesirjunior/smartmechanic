@@ -33,7 +33,7 @@ const Finished = () => {
         <Row>
           <Col md={1} className="p-0 my-2">
             <div className="no-underline text-white bg-black text-lg font-semibold  m-2 text-center hover:text-xl h-100 flex justify-center items-center">
-              Sr
+              Service No.
             </div>
           </Col>
           <Col md={8} className="p-0  my-2">

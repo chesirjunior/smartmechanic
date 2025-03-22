@@ -1,6 +1,5 @@
 import { Router } from "express";
 import categories_Controller from "../../controller/mechanic/categories.js";
-import mech_AuthMiddleware from "../../middleware/mechanic/index.js";
 const categoriesRouter = Router();
 
 categoriesRouter.post(

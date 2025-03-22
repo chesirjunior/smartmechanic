@@ -15,5 +15,7 @@ mechanicRouter.delete(
   // mech_AuthMiddleware,
   mechanicController.delete
 );
+// count router
+mechanicRouter.get("/mechanic/count", mechanicController.count);
 
 export default mechanicRouter;

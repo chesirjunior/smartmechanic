@@ -15,39 +15,54 @@ if (!process.env.EMAIL_USER || !process.env.EMAIL_PASS) {
   process.exit(1);
 }
 
+// Configure Nodemailer transporter
 const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
-  port: Number(process.env.EMAIL_PORT) || 587,
-  secure: false, // False for TLS, True for SSL
+  host: process.env.EMAIL_HOST || "smtp.gmail.com", // Fallback to Gmail SMTP
+  port: Number(process.env.EMAIL_PORT) || 587, // Fallback to port 587
+  secure: false, // Use TLS
   auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
+    user: process.env.EMAIL_USER, // Your Gmail address
+    pass: process.env.EMAIL_PASS, // Your Gmail app password
   },
   tls: {
     rejectUnauthorized: false, // Allow self-signed certs
   },
+  debug: true, // Enable debugging for detailed logs
 });
 
+// Send email endpoint
 export const sendEmail = async (req, res) => {
   const { to, subject, text } = req.body;
 
+  // Validate input
   if (!to || !subject || !text) {
     return res.status(400).json({ error: "Missing required email fields." });
   }
 
   try {
-    await transporter.sendMail({
-      from: `"Mechanic Service" <${process.env.EMAIL_USER}>`,
-      to,
-      subject,
-      text,
-    });
+    // Send email
+    const mailOptions = {
+      from: `"Mechanic Service" <${process.env.EMAIL_USER}>`, // Sender address
+      to, // Recipient address
+      subject, // Subject line
+      text, // Plain text body
+    };
+
+    await transporter.sendMail(mailOptions);
 
     console.log(`✅ Email sent successfully to: ${to}`);
     res.status(200).json({ message: "Email sent successfully" });
   } catch (error) {
     console.error("❌ Error sending email:", error.message);
-    res.status(500).json({ error: "Failed to send email", details: error.message });
+
+    // Handle specific SMTP connection errors
+    if (error.code === "ETIMEDOUT") {
+      res.status(500).json({ error: "Connection to the SMTP server timed out. Check your network or SMTP settings." });
+    } else if (error.code === "EAUTH") {
+      res.status(500).json({ error: "Authentication failed. Check your email credentials." });
+    } else {
+      res.status(500).json({ error: "Failed to send email", details: error.message });
+    }
   }
 };
 

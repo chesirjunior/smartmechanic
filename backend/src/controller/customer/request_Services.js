@@ -38,7 +38,7 @@ const requestServices_Controller = {
   readAll: async (req, res) => {
     try {
       const services = await requestServices_Model.findAll();
-      res.json({ services });
+      res.json( services );
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: "Internal Server Error" });
@@ -148,6 +148,18 @@ const requestServices_Controller = {
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: "Internal Server Error" });
+    }
+  },
+  count: async (req, res) => {
+    try {
+      const serviceCount = await requestServices_Model.count();
+      res.json( serviceCount );
+      console.log(serviceCount);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        message: "Failed to fetch data",
+      });
     }
   },
 };

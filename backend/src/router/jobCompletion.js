@@ -14,5 +14,9 @@ job_CompletionRouter.get(
   // mech_AuthMiddleware,
   job_CompletionController.read
 );
+job_CompletionRouter.get ("/jobcompletion/count", job_CompletionController.count)
+
+// job_CompletionRouter.get("/bills", job_CompletionController.sumBills);
+job_CompletionRouter.get("/sum", job_CompletionController.sumBills);
 
 export default job_CompletionRouter;

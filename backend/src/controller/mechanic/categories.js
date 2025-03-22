@@ -23,9 +23,9 @@ const categories_Controller = {
   read: async (req, res) => {
     try {
       const getCategories = await CategoriesModel.findAll({});
-      res.json({
+      res.json(
         getCategories,
-      });
+      );
     } catch (error) {
       res.status(500).json({
         message: "Something bad happened to server",

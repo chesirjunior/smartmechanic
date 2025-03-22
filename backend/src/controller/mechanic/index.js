@@ -83,13 +83,13 @@ const mechanicController = {
   },
   read: async (req, res) => {
     try {
-      const getMechanic = await MechanicModel.findAll({});
-      res.json({
+      const getMechanic = await MechanicModel.findAll({attributes: { exclude: ["Password"] },});
+      res.json(
         getMechanic,
-      });
+      );
     } catch (error) {
       res.status(500).json({
-        message: "Something bad happened to server",
+        message: "Failed to fetch data",
       });
     }
   },
@@ -162,6 +162,19 @@ const mechanicController = {
       console.log(error);
       res.status(500).json({
         message: "Something bad happened to server",
+      });
+    }
+  },
+
+  //count all mechanics
+  count: async (req, res) => {
+    try {
+      const mechanicCount = await MechanicModel.count();
+      res.json( mechanicCount );
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        message: "Failed to fetch data",
       });
     }
   },

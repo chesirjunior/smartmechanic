@@ -16,5 +16,6 @@ customerRouter.delete(
   // cust_AuthMiddleware,
   customerController.delete
 );
+customerRouter.get("/user/count", customerController.count);
 
 export default customerRouter;

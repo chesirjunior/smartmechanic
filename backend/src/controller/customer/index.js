@@ -58,13 +58,13 @@ const customerController = {
 
   read: async (req, res) => {
     try {
-      const getCustomer = await CustomerModel.findAll({});
-      res.json({
+      const getCustomer = await CustomerModel.findAll({attributes: { exclude: ["Password"] },});
+      res.json(
         getCustomer,
-      });
+      );
     } catch (error) {
       res.status(500).json({
-        message: "Something bad happened to server",
+        message: "Failed to fetch data",
       });
     }
   },
@@ -119,6 +119,17 @@ const customerController = {
     } catch (error) {
       console.log(error);
       res.status(500).json({ message: "Internal Server Error" });
+    }
+  },
+  count: async (req, res) => {
+    try {
+      const customerCount = await CustomerModel.count();
+      res.json( customerCount );
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        message: "Failed to fetch data",
+      });
     }
   },
 };

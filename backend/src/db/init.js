@@ -6,7 +6,7 @@ import cust_ImageModel from "../model/customer/images.js";
 import mech_ImageModel from "../model/mechanic/images.js";
 import job_CompletionModel from "../model/mechanic/jobComplete.js";
 import ContactModel from "../model/customer/contact.js";
-
+import AdminModel from "../model/Admin/index.js";
 const initDB = async () => {
   try {
     await CustomerModel.sync({ alter: true, force: false });
@@ -31,7 +31,10 @@ const initDB = async () => {
     console.log("✅ CategoriesModel synced successfully.");
    
     await ContactModel.sync({ alter: true, force: false }); 
-    console.log("✅ ContactModel synced successfully.");    
+    console.log("✅ ContactModel synced successfully."); 
+    
+    await AdminModel.sync({ alter: true, force: false }); 
+    console.log("✅ AdminModel synced successfully."); 
 
     console.log("✅ All models synced successfully.");
   } catch (err) {

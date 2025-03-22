@@ -10,6 +10,7 @@ request_SRouter.post(
 );
 request_SRouter.get("/services", requestServices_Controller.readAll);
 request_SRouter.get("/servicesw", requestServices_Controller.readwhere);
+request_SRouter.get("/services/count", requestServices_Controller.count);
 // request_SRouter.get("/servicesc", requestServices_Controller.readcomplete);
 
 request_SRouter.get(
@@ -32,5 +33,7 @@ request_SRouter.put(
   // cust_AuthMiddleware,
   requestServices_Controller.update
 );
+
+
 
 export default request_SRouter;
